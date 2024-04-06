@@ -48,7 +48,28 @@ final router = GoRouter(
       builder: (context, state) => const _Root(),
       routes: [_sheetShellRoute],
     ),
+    _modal
   ],
+);
+
+final _modal = GoRoute(
+  path: '/modal',
+  pageBuilder: (context, state) => ModalSheetPage(
+      child: SheetDismissible(
+    child: DraggableSheet(
+      child: Card(
+        color: Theme.of(context).colorScheme.secondaryContainer,
+        margin: EdgeInsets.zero,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: const SizedBox(
+          height: 500,
+          width: double.infinity,
+        ),
+      ),
+    ),
+  )),
 );
 
 // A ShellRoute is used to create a new Navigator for nested navigation in the sheet.
@@ -238,9 +259,9 @@ class _IntroPage extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               TextButton(
-                onPressed: () => context.go('/'),
+                onPressed: () => context.push('/modal'),
                 style: _largeTextButtonStyle,
-                child: const Text('No, thanks'),
+                child: const Text('Open modal'),
               ),
             ],
           ),
