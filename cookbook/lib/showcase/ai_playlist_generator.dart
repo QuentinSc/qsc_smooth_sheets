@@ -40,8 +40,9 @@ class _AiPlaylistGeneratorExample extends StatelessWidget {
 // ----------------------------------------------------------
 
 final sheetTransitionObserver = NavigationSheetTransitionObserver();
-
+final GlobalKey<NavigatorState> _rootNavigator = GlobalKey(debugLabel: 'root');
 final router = GoRouter(
+  navigatorKey: _rootNavigator,
   routes: [
     GoRoute(
       path: '/',
@@ -54,6 +55,7 @@ final router = GoRouter(
 
 final _modal = GoRoute(
   path: '/modal',
+  parentNavigatorKey: _rootNavigator,
   pageBuilder: (context, state) => ModalSheetPage(
       child: SheetDismissible(
     child: DraggableSheet(
